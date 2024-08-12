@@ -30,7 +30,7 @@ RUN mkdir -p /zenoh/target/
 RUN mkdir -p /zenoh/target/release
 
 # Copy the built debug artifacts from the builder stage
-COPY --from=builder /zenoh/target/release /zenoh/target/release
+COPY --from=builder /zenoh/target/release/libzenoh_plugin_rest.so /zenoh/target/release/libzenoh_plugin_rest.so
 
 # Copy the configuration file
 COPY ./CUSTOM_CONFIG.json5 /zenoh/CUSTOM_CONFIG.json5
