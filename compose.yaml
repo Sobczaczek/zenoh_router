@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+  zenoh:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "7447:7447"
+      - "8000:8000"
+    environment:
+      - ZENOH_CONFIG_PATH=/zenoh/CUSTOM_CONFIG.json5
+    command: ["zenohd", "-c", "/zenoh/CUSTOM_CONFIG.json5"]

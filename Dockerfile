@@ -8,6 +8,8 @@ RUN apk add --no-cache \
 
 # Copy the local zenoh directory with changes
 COPY ./zenoh /zenoh
+
+# Set workdit to /zenoh
 WORKDIR /zenoh
 
 # Build Zenoh in release mode
@@ -29,7 +31,7 @@ RUN mkdir -p /zenoh
 RUN mkdir -p /zenoh/target/
 RUN mkdir -p /zenoh/target/release
 
-# Copy the built debug artifacts from the builder stage
+# Copy the built debug artifacts from the builder stage (plugins)
 COPY --from=builder /zenoh/target/release/libzenoh_plugin_rest.so /zenoh/target/release/libzenoh_plugin_rest.so
 
 # Copy the configuration file
@@ -39,5 +41,5 @@ COPY ./CUSTOM_CONFIG.json5 /zenoh/CUSTOM_CONFIG.json5
 EXPOSE 7447
 EXPOSE 8000
 
-# Start Zenoh daemon with a specific configuration file
+# Start Zenoh daemon with a  configuration file
 CMD ["zenohd", "-c", "zenoh/CUSTOM_CONFIG.json5"]
